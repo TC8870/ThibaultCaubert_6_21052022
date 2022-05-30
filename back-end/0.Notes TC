@@ -1,5 +1,41 @@
+Notes TC
+    > nodemon : "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser" (pour lancer le server nodemon dans le back end) puis "nodemon server"
+    > ne pas oublier de lancer "npm run start" dans le front end
+
 A faire
-
-
+    > attention au module auth avec l'authentification par ID, à changer par email ?
+    > ajouter multer pour les images
+    > ajouter le like/unlike
 
 Questions Mewena
+    > delete req.body._id => a mettre ou non ?
+
+Réalisé :
+    > Créer le projet vide
+    > Installer node sur le front end (npm install)
+    > Initialiser le projet sur le back end (npm init)
+    > Créer le fichier server.js
+    > Installer nodemon pour la visualisation des réponses serveurs en temps réel sans relancer node server à chaque fois
+    > Installer Express (npm install express --save)
+    > Créer le fichier app.js
+    > Installer Mongoose (npm install mongoose)
+    > Connecter à la base MongoDB - utilisateur 123 (mdp:123)
+    > Créer un modèle sauce via mongoose
+    > Créer la route POST avec le modèle mongoose pour alimenter la base
+    > Créer la route GET pour récupérer toutes les données de la base
+    > Créer la route GET ONE pour récupérer une donnée de la base
+    > Créer la route PUT pour modifier une donnée de la base => problème de test (erreur 500)
+    > Créer la route DELETE pour supprimer une donnée de la base => problème de test (erreur 500)
+    > Créer le dossier Models + fichier M_Sauce et créer un modèle de sauce 
+    > Créer le dossier Controllers + fichier C_Sauces et y déplacer les Controllers
+    > Créer le dossier Routes + fichier R_Sauces et y déplacer les routes + intégrer le routeur 
+    > Créer le modèle User
+    > Installer le package (npm install --save mongoose-unique-validator)
+    > Créer la route User
+    > Installer le module de cryptage (npm install --save bcrypt)
+    > Créer le controller Signup
+    > Créer le controller Login
+    > Installer jsonwebtoken (npm install --save jsonwebtoken)
+    > Créer le token dans le login
+    > Créer le middleware d'authentification
+    > Appliquer le middleware d'authentification aux routes Sauce GET/POST/PUT/DELETE
