@@ -1,12 +1,34 @@
-//Express
-const { json } = require('express');
+//Import des Require Express, BodyParser, Mongoose et Path
 const express = require('express');
-const app = express();
-app.use(express.json());
-
-//Mongoose
+const bodyParser = require('body-parser'); 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://123:123@cluster0.0daop.mongodb.net/?retryWrites=true&w=majority',
+const path = require ('path');
+
+//Import des routeurs
+const sauceRoutes = require ('./Routes/R_Sauce');
+const userRoutes = require ('./Routes/R_User');
+
+//Création application express
+const app = express();
+
+// utilisation du module 'dotenv' pour masquer les informations de connexion à la base de données à l'aide de variables d'environnement
+require('dotenv').config();
+
+//Mongoose - connexion à la base de données Mongo avec la sécurité vers le fichier .env pour cacher le mot de passe
+  // mongoose.connect(process.env.DB_URI, {
+  //   useCreateIndex: true,
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true
+  // })
+  // .then(() => console.log('Connexion à MongoDB réussie !'))
+  // .catch(() => console.log('Connexion à MongoDB échouée !'));
+
+
+
+  const userIdentifiant = '123';
+  const userPassword ='123';
+  
+mongoose.connect('mongodb+srv://'+ userIdentifiant + ':' + userPassword +'@cluster0.0daop.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -20,13 +42,14 @@ app.use((req, res, next) => {
     next();
   });
 
-//Import du routeur Sauces
-const sauceRoutes = require ('./Routes/R_Sauce');
-app.use ('/api/sauces', sauceRoutes);
+// Middleware qui permet de parser les requêtes envoyées par le client, on peut y accéder grâce à req.body
+app.use(bodyParser.urlencoded({extended: true}));
+//Transforme les données arrivant de la requête POST en un objet JSON facilement exploitable
+app.use(bodyParser.json());
 
-//Import du routeur Users
-const userRoutes = require ('./Routes/R_User');
+app.use ('/Images', express.static(path.join(__dirname, 'Images')));
+app.use ('/api/sauces', sauceRoutes);
 app.use ('/api/auth', userRoutes);
 
-//Export
+//Export de l'application 
 module.exports = app;

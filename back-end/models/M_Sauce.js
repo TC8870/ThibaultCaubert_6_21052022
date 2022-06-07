@@ -7,13 +7,14 @@ const sauceSchema = mongoose.Schema ({
     manufacturer : {type : String, required : true },
     description : {type : String, required : true },
     mainPepper : {type : String, required : true },
-    imageUrl : {type : String, required : true },
+    imageUrl : {type : String, required : false },
     heat : {type : Number, required: true},
     likes : {type: Number, required: false, value : 0},
     dislikes : {type: Number, required: false, value : 0},
-    usersLiked : {type: Array, required: false},
-    usersDisliked : {type: Array, required: false},
+    usersLiked : [String],
+    usersDisliked : [String],
     });
+
 //Export du schéma
 module.exports = mongoose.model('Sauce', sauceSchema);
 
