@@ -1,9 +1,10 @@
 const User = require('../models/M_User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+//Intégration des variables d'environnement
 require('dotenv').config();
-const KEY_TOKEN = 'RFMC56DD5DDZFFE96GF3GF14GZ3A68S31F8V9ZE1FE67FEG1V886NN57VD66CT44T';
-const EXPIRE_TIME = '2h';
+const KEY_TOKEN = process.env.KEY_TOKEN;
+const EXPIRE_TIME = process.env.EXPIRE_TIME;
 
 //Créer un compte utilisateur ********************************************************************************
 exports.signup = (req, res, next) => {

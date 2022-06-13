@@ -3,6 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser'); 
 const mongoose = require('mongoose');
 const path = require ('path');
+//Import du module de variable d'environnement Dotenv
+const dotenv = require('dotenv');
+dotenv.config();
 
 //Import des routeurs
 const sauceRoutes = require ('./Routes/R_Sauce');
@@ -12,21 +15,9 @@ const userRoutes = require ('./Routes/R_User');
 const app = express();
 
 // utilisation du module 'dotenv' pour masquer les informations de connexion à la base de données à l'aide de variables d'environnement
-require('dotenv').config();
-
-//Mongoose - connexion à la base de données Mongo avec la sécurité vers le fichier .env pour cacher le mot de passe
-  // mongoose.connect(process.env.DB_URI, {
-  //   useCreateIndex: true,
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true
-  // })
-  // .then(() => console.log('Connexion à MongoDB réussie !'))
-  // .catch(() => console.log('Connexion à MongoDB échouée !'));
-
-
-
-  const userIdentifiant = '123';
-  const userPassword ='123';
+  require('dotenv').config();
+  const userIdentifiant = process.env.userIdentifiant;
+  const userPassword =process.env.userPassword;
   
 mongoose.connect('mongodb+srv://'+ userIdentifiant + ':' + userPassword +'@cluster0.0daop.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,

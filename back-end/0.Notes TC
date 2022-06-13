@@ -1,20 +1,6 @@
 Notes TC
 Pour démarrer 
-    > nodemon : "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser" (pour lancer le server nodemon dans le back end) puis "nodemon server"
-    > npm run start
-
-Actions : 
-    > problème avec ENV, voir pour réinstaller
-
-    > Sanitizer sur les 2 modèles ??
-
-    // Plugin pour Mongoose qui purifie les champs du model avant de les enregistrer dans la base MongoDB.
-    // Utilise le HTML Sanitizer de Google Caja pour effectuer la désinfection.
-    sauceSchema.plugin(sanitizerPlugin);
-    const sanitizerPlugin = require('mongoose-sanitizer-plugin');
-
-    //cas si sauce unique ? validator ?
-
+    > "nodemon server"
 
 Réalisé :
     > Créer le projet vide
@@ -50,28 +36,12 @@ Réalisé :
     > Modifier la route POST avec multer
     > Modifer la route PUT avec multer
     > Supprimer l'image du dossier lors d'un DELETE
-    > Installer dotenv (npm i express dotenv )
     > Installer body-parser (npm install body-parser --save)
     > Corriger les fichiers js
+    > Controller Auth et Multer OK
+    > Routes Get, Get All et Post OK
+    > Correction de Auth
+    > Routes Put, Delete et like corrigées
+    > Installer dotenv (npm i express dotenv )
+    > Créer le fichier Env et paramétrer dotenv
 
-
-Tests :
-User : 
-{    
-    "email" : "TC@test.fr",
-    "password" : "TC"
-}
-Sauce :sous form et non JSON
- {
-    "userId" : "id",
-    "name" : "Sauce qui pique",
-    "manufacturer" : "Fabricant sympathique",
-    "description" : "Sauce agréable",
-    "mainPepper" : "Poivre",
-    "imageUrl" : "https://www.papillesetpupilles.fr/wp-content/uploads/2020/06/Sauce-au-poivre-5-baies.jpg",
-    "heat" : 5,
-    "likes" : 0,
-    "dislikes" : 0,
-    "usersLiked" : [],
-    "usersDisliked" : []
- }

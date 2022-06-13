@@ -4,9 +4,9 @@ const multer = require('multer');
 // On crée un dictionnaire des types MIME pour définire le format des images
 // Donc la creation d'un objet pour ajouter une extention en fonction du type mime du ficher
 const MIME_TYPES = {
-  'Image/jpg': 'jpg',
-  'Image/jpeg': 'jpg',
-  'Image/png': 'png'
+  'image/jpg': 'jpg',
+  'image/jpeg': 'jpg',
+  'image/png': 'png'
 };
 // On crée un objet de configuration pour préciser à multer où enregistrer les fichiers images et les renommer
 const storage = multer.diskStorage({
@@ -26,4 +26,4 @@ const storage = multer.diskStorage({
 });
 
 // On export le module, on lui passe l'objet storage, la méthode single pour dire que c'est un fichier unique et on précise que c'est une image
-module.exports = multer({storage: storage}).single('Image');
+module.exports = multer({storage: storage}).single('image');
