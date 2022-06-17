@@ -49,7 +49,7 @@ exports.modifySauce = (req, res, next) => {
         .then((sauce) => {
             //Si Id ne correspond pas
             if (sauce.userId !== req.auth.userId) {
-                res.status(403).json({ error: 'Requête non authorisée' });
+                res.status(403).json({ error });
             }
             //Sinon
             else {
@@ -68,7 +68,7 @@ exports.deleteSauce = (req, res, next) => {
                 if (!sauce) {
                     res.status(404).json({ erreur: new Error('Sauce non trouvée') })
                 }
-                if (sauce.userId !== req.auth.userId) {
+                else if (sauce.userId !== req.auth.userId) {
                     res.status(401).json({ erreur: new Error('Requête non autorisée') })
                 }
                 else {
@@ -90,7 +90,10 @@ exports.likeDislike = (req, res, next) => {
             //Si like, contrôle si déjà liké, si ok alors ajout de l'ID utilisateur + compteur incrémenté de 1 
             if (req.body.like === 1) {
                 if (sauce.usersLiked.includes(req.body.userId)) {
-                    res.status(401).json({ error: 'Sauce déja liké' });
+                    res.status(401).json({ error: 'Sauce déja liké' });                   
+                }
+                else if (sauce.usersDisliked.includes(req.body.userId)) {
+                    res.status(401).json({ error: 'Sauce déja disliké' });
                 }
                 else {
                     Sauce.updateOne({ _id: req.params.id },
@@ -106,6 +109,9 @@ exports.likeDislike = (req, res, next) => {
             if (req.body.like === -1) {
                 if (sauce.usersDisliked.includes(req.body.userId)) {
                     res.status(401).json({ error: 'Sauce déja disliké' });
+                }
+                else if (sauce.usersLiked.includes(req.body.userId)) {
+                    res.status(401).json({ error: 'Sauce déja liké' });                   
                 }
                 else {
                     Sauce.updateOne({ _id: req.params.id },
