@@ -143,7 +143,17 @@ exports.likeDislike = (req, res, next) => {
                         .then(() => res.status(201).json({ message: 'Dislike retiré !' }))
                         .catch((error) => res.status(400).json({ error }))
                 }
+                if (req.body.like === 0) {
+                    Sauce.updateOne({ _id: req.params.id },
+                        {
+                            $pull: { usersLiked: req.body.userId },
+                            $pull: { usersDisliked: req.body.userId },
+                            $inc: { likes: -1 },
+                            $inc: { dislikes: -1 },
+                        })
+                    .then(() => res.status(201).json({ message: 'Avis retirés !' }))
+                    .catch((error) => res.status(400).json({ error }))
             }
-        })
+        }})
         .catch((error) => res.status(404).json({ error }))
 }
